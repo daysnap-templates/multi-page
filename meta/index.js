@@ -39,6 +39,24 @@ module.exports = {
         name: 'lintConfig',
         choices: ['eslint', 'prettier'],
       },
+      {
+        type: 'checkbox',
+        name: 'libs',
+        choices: [
+          {
+            name: '引入移动端适配 flexible.js ?',
+            value: 'flexible'
+          },
+          {
+            name: '引入 jquery.js ?',
+            value: 'jquery'
+          },
+          {
+            name: '引入微信 jssdk ?',
+            value: 'jweixin'
+          },
+        ]
+      }
     ])
   },
   // 配置过滤文件的方式 2种
@@ -54,6 +72,9 @@ module.exports = {
   //   })
   // }
   configureFilter: {
+    'flexible.js': 'libs.includes("flexible")',
+    'jquery-1.8.1.min.js': 'libs.includes("jquery")',
+    'jweixin-1.6.0.js': 'libs.includes("jweixin")',
     '.eslintrc.js': 'lintConfig.includes("eslint")',
   },
   // 完成
