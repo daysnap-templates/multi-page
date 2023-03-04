@@ -8,7 +8,7 @@
 npm install @daysnap/cli
 ```
 2. 在你的项目目录下执行
-```bash 
+```bash
 dsc create my-project -t {{ name }}
 ```
 3. 更多命令可以执行 `dsc -h` 查看
@@ -31,5 +31,10 @@ dsc -h
 
 
 
-### cross-env
+## 依赖包
 
+- [webpack]
+- [webpack-cli]
+- [webpack-dev-server]
+- [webpack-merge](https://www.npmjs.com/package/webpack-merge)
+- [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin)
