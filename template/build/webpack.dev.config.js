@@ -19,9 +19,6 @@ module.exports = merge(webpackCommonConfig, {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../',
-            },
           },
           'css-loader',
         ],
@@ -38,6 +35,7 @@ module.exports = merge(webpackCommonConfig, {
             },
           },
           'css-loader',
+          'sass-loader',
         ],
       },
     ],
@@ -47,7 +45,7 @@ module.exports = merge(webpackCommonConfig, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'assets/css/[name].[hash:10].css',
+      filename: 'assets/css/[name].[contenthash:10].css',
     }),
     new CopyWebpackPlugin({
       patterns: [

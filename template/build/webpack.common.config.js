@@ -13,10 +13,10 @@ module.exports = {
 
   // 输出
   output: {
-    filename: 'assets/js/[name].[hash:10].js',
+    // hash、 chunkhash 、 contenthash
+    filename: 'assets/js/[name].[contenthash:10].js',
     path: resolve('dist'),
-    // publicPath: './',
-    // assetModuleFilename: 'assets/[name].[hash:10][ext]',
+    publicPath: './',
   },
 
   // 别名
@@ -46,24 +46,25 @@ module.exports = {
       // 图片
       {
         test: /\.(png|jpe?g|gif)$/,
+        type: 'asset',
         exclude: /node_modules/,
-        loader: 'url-loader',
-        options: {
-          limit: 0 * 1024,
-          esModule: false,
-          name: '[name].[hash:10].[ext]',
-          outputPath: 'assets/img',
+        generator: {
+          filename: 'assets/img/[name].[contenthash:10][ext]',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 0 * 1024,
+          },
         },
       },
-      // // other
-      // {
-      //   exclude: /\.(css|scss|sass|js|ts|html|png|jpe?g|gif)/,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: '[name].[hash:4].[ext]',
-      //     outputPath: 'assets/medias',
-      //   },
-      // },
+      // 视频、音频文件
+      {
+        test: /\.(mp4|mp3)$/,
+        type: 'asset/source',
+        generator: {
+          filename: 'assets/medias/[name].[contenthash:10][ext]',
+        },
+      },
     ],
   },
 
