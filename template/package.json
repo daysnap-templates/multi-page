@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "dev": "webpack --config ./build/webpack.config.js",
+    "start": "webpack-dev-server --config ./build/webpack.config.js --env development",
+    "dev": "webpack --config ./build/webpack.config.js --env development",
     "build": "webpack --config ./build/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,14 +13,28 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.21.0",
     "@daysnap/require-context": "^0.0.2",
+    "art-template": "^4.13.2",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "loader-utils": "^3.2.1",
+    "mini-css-extract-plugin": "^2.7.2",
+    "postcss-loader": "^7.0.2",
     "prettier": "^2.8.4",
+    "sass": "^1.58.3",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1",
     "webpack-merge": "^5.8.0"
   }
 }
