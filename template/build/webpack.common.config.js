@@ -16,7 +16,7 @@ module.exports = {
     // hash、 chunkhash 、 contenthash
     filename: 'assets/js/[name].[contenthash:10].js',
     path: resolve('dist'),
-    publicPath: './',
+    // publicPath: './',
   },
 
   // 别名
