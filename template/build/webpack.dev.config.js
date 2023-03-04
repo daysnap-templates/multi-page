@@ -24,14 +24,6 @@ module.exports = merge(webpackCommonConfig, {
             },
           },
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [['postcss-preset-env']],
-              },
-            },
-          },
         ],
       },
       // sass 样式
@@ -46,15 +38,6 @@ module.exports = merge(webpackCommonConfig, {
             },
           },
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [['postcss-preset-env']],
-              },
-            },
-          },
-          'sass-loader',
         ],
       },
     ],

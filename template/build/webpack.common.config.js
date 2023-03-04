@@ -47,21 +47,21 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'url-loader',
         options: {
-          limit: 4 * 1024,
+          limit: 0 * 1024,
           esModule: false,
           name: '[name][hash:10].[ext]',
           outputPath: 'assets/img',
         },
       },
-      // other
-      {
-        exclude: /\.(css|scss|sass|js|ts|html|png|jpe?g|gif)/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[hash:4].[ext]',
-          outputPath: 'assets/medias',
-        },
-      },
+      // // other
+      // {
+      //   exclude: /\.(css|scss|sass|js|ts|html|png|jpe?g|gif)/,
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: '[name].[hash:4].[ext]',
+      //     outputPath: 'assets/medias',
+      //   },
+      // },
     ],
   },
 
