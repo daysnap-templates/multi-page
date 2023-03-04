@@ -1,9 +1,5 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { parseDir, resolve } = require('./utils')
 const { entry, arrHtmlWebpackPlugin } = parseDir(resolve('src/views'))
-
-console.log('entry => ', entry)
 
 // webpack5
 // https://webpack.docschina.org/
@@ -13,7 +9,7 @@ module.exports = {
   mode: 'development',
 
   // 入口
-  entry: resolve('src/index.js'),
+  entry,
 
   // 输出
   output: {
@@ -36,51 +32,6 @@ module.exports = {
       {
         test: /\.html/,
         loader: resolve('build/art-template-loader'),
-      },
-      // css 样式
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../',
-            },
-          },
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [['postcss-preset-env']],
-              },
-            },
-          },
-        ],
-      },
-      // sass 样式
-      {
-        test: /\.s[ca]ss$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../../',
-            },
-          },
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [['postcss-preset-env']],
-              },
-            },
-          },
-          'sass-loader',
-        ],
       },
       // js
       {
@@ -112,5 +63,5 @@ module.exports = {
   },
 
   // 插件
-  plugins: [new CleanWebpackPlugin(), ...arrHtmlWebpackPlugin],
+  plugins: [...arrHtmlWebpackPlugin],
 }
