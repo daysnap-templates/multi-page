@@ -32,6 +32,9 @@ module.exports = {
       {
         test: /\.html/,
         loader: resolve('build/art-template-loader'),
+        options: {
+          x: 1,
+        },
       },
       // js
       {

@@ -25,7 +25,7 @@ module.exports = merge(webpackCommonConfig, {
   // devServer
   devServer: {
     // 运行目录
-    contentBase: resolve('public'),
+    static: resolve('public'),
     host: '0.0.0.0',
     // 启动 gzip 压缩
     compress: true,

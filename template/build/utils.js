@@ -6,10 +6,17 @@ const fs = require('fs')
 const resolve = (...args) => path.join(__dirname, '..', ...args)
 
 const getTemplateFile = (dirname) => {
-  return ['html.ts', 'html.js', 'index.html'].find((filename) => {
-    const filepath = path.join(dirname, filename)
-    return fs.statSync(filepath)
-  })
+  return ['html.ts', 'html.js', 'index.html']
+    .map((filename) => path.join(dirname, filename))
+    .find((filepath) => {
+      let stat
+      try {
+        stat = fs.statSync(filepath)
+      } catch {
+        /* empty */
+      }
+      return !!stat
+    })
 }
 
 const parseDir = (dir) => {
@@ -26,7 +33,7 @@ const parseDir = (dir) => {
         arrHtmlWebpackPlugin.push(
           new HtmlWebpackPlugin({
             filename: `${name}.html`,
-            template: getTemplateFile(),
+            template: getTemplateFile(dirname),
             minify: {
               removeAttributeQuotes: false, // 移除属性的引号
               removeComments: false, // 移除注释

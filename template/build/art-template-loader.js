@@ -8,7 +8,7 @@ const precompile = require('art-template/lib/precompile')
 
 const loader = function (source) {
   let result
-  let options = loaderUtils.getOptions(this) || {}
+  let options = this.getOptions() || {}
   // let htmlResourceRules = [/( | data-)src="([^"]*)"/];
   let htmlResourceRules = [/\bsrc="([^"]*)"/]
   const htmlResourceRoot = options.htmlResourceRoot
