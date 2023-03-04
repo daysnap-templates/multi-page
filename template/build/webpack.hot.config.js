@@ -33,7 +33,7 @@ module.exports = merge(webpackCommonConfig, {
     port: 9527,
     // 自动打开浏览器
     open: false,
-    // 开启 hot
-    hot: true,
+    // hot
+    hot: false,
   },
 })

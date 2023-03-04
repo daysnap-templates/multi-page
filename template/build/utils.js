@@ -30,6 +30,7 @@ const parseDir = (dir) => {
         const name = dirname.slice(dir.length + 1).replaceAll(path.sep, '-')
 
         entry[name] = filepath
+
         arrHtmlWebpackPlugin.push(
           new HtmlWebpackPlugin({
             filename: `${name}.html`,
