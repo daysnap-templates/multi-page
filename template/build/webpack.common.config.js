@@ -13,8 +13,10 @@ module.exports = {
 
   // 输出
   output: {
-    path: resolve('dist'),
     filename: 'assets/js/[name].[hash:10].js',
+    path: resolve('dist'),
+    // publicPath: './',
+    // assetModuleFilename: 'assets/[name].[hash:10][ext]',
   },
 
   // 别名
@@ -49,7 +51,7 @@ module.exports = {
         options: {
           limit: 0 * 1024,
           esModule: false,
-          name: '[name][hash:10].[ext]',
+          name: '[name].[hash:10].[ext]',
           outputPath: 'assets/img',
         },
       },

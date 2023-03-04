@@ -12,11 +12,13 @@ module.exports = merge(webpackCommonConfig, {
       // css
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
       },
       // sass 样式
       {
         test: /\.s[ca]ss$/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
