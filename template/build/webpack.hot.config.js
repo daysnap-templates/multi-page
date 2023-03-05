@@ -40,5 +40,18 @@ module.exports = merge(webpackCommonConfig, {
     open: false,
     // hot
     hot: false,
+
+    // 代理
+    // proxy: {
+    //   //定义一个标记，如以后api开头的请求都走代理的设置
+    //   '/api': {
+    //     // 要请求的真实服务端基地址 相当于被/api替代了
+    //     target: 'https://...',
+    //     //把api重写为空，因为别人没有 /api
+    //     pathRewrite: { '^/api': '' },
+    //     //发送请求头中host会设置成target
+    //     changeOrigin: true,
+    //   },
+    // },
   },
 })

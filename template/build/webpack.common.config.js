@@ -53,7 +53,7 @@ module.exports = {
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 0 * 1024,
+            maxSize: 1 * 1024,
           },
         },
       },
