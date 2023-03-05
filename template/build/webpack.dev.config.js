@@ -1,9 +1,9 @@
 const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const webpackCommonConfig = require('./webpack.common.config')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { resolve } = require('path')
+const webpackCommonConfig = require('./webpack.common.config')
 
 module.exports = merge(webpackCommonConfig, {
   // 模式
@@ -20,7 +20,15 @@ module.exports = merge(webpackCommonConfig, {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              // https://webpack.docschina.org/loaders/css-loader#importloaders
+              // https://stackoverflow.com/questions/52544620/what-is-exactly-the-importloaders-option-of-css-loader-in-webpack-4
+              importLoaders: 1,
+            },
+          },
+          'postcss-loader',
         ],
       },
       // sass 样式
@@ -32,6 +40,7 @@ module.exports = merge(webpackCommonConfig, {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
+          'postcss-loader',
           'sass-loader',
         ],
       },

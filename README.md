@@ -39,3 +39,6 @@ dsc -h
 - [webpack-merge](https://www.npmjs.com/package/webpack-merge)
 - [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin)
 - [clean-webpack-plugin]
+
+- [postcss-loader]
+- [postcss-preset-env]

@@ -60,9 +60,19 @@ module.exports = {
       // 视频、音频文件
       {
         test: /\.(mp4|mp3)$/,
-        type: 'asset/source',
+        type: 'asset/resource',
+        exclude: /node_modules/,
         generator: {
           filename: 'assets/medias/[name].[contenthash:10][ext]',
+        },
+      },
+      // 字体
+      {
+        test: /\.(ttf|woff2?)$/,
+        type: 'asset/resource',
+        exclude: /node_modules/,
+        generator: {
+          filename: 'assets/fonts/[name].[contenthash:10][ext]',
         },
       },
     ],
