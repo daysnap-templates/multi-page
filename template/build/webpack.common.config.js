@@ -40,7 +40,7 @@ module.exports = {
       },
       // js
       {
-        test: /\.[jt]s$/,
+        test: /\.js$/,
         loader: 'babel-loader',
       },
       // 图片
