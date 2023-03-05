@@ -30,9 +30,6 @@ module.exports = merge(webpackCommonConfig, {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../../',
-            },
           },
           'css-loader',
           'sass-loader',
