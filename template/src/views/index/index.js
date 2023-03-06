@@ -1,2 +1,3 @@
 import './index.scss'
-console.log('3122222')
+import 'src/components/header'
+import './components/footer'
