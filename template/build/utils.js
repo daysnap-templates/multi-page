@@ -41,7 +41,7 @@ const parseDir = (dir) => {
               collapseWhitespace: false, // 折叠空白区域
             },
             chunks: [name],
-            inject: true,
+            inject: 'body',
           }),
         )
 

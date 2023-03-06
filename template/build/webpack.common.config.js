@@ -1,5 +1,6 @@
 const { parseDir, resolve } = require('./utils')
 const { entry, arrHtmlWebpackPlugin } = parseDir(resolve('src/views'))
+const resolveFilename = require('art-template/lib/compile/adapter/resolve-filename.js')
 
 // webpack5
 // https://webpack.docschina.org/
@@ -35,7 +36,14 @@ module.exports = {
         test: /\.html/,
         loader: resolve('build/art-template-loader'),
         options: {
-          x: 1,
+          // https://aui.github.io/art-template/zh-cn/docs/options.html
+          resolveFilename(path, context) {
+            ;/^src/.test(path) && (path = path.replace(/^src/, resolve('src')))
+            return resolveFilename(path, context)
+          },
+          // 扩展出来，排除一些不需要的 js 资源引入
+          htmlResourceRules: [/\bsrc="([~|^"](.*?))"/],
+          filter: () => true,
         },
       },
       // js

@@ -2,9 +2,8 @@ const loaderUtils = require('loader-utils')
 const template = require('art-template')
 const precompile = require('art-template/lib/precompile')
 
-// 修改字符串解析模板 保证不要与 vue 产生冲突
-// template.defaults.rules[1].test = /\${([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}/;
-// Proprietary options: htmlResourceRoot, htmlResourceRules
+// todo 这里修改配置规则 防止跟 vue 冲突
+template.defaults.rules[1].test = /{{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}}/
 
 const loader = function (source) {
   let result
@@ -13,15 +12,13 @@ const loader = function (source) {
   let htmlResourceRules = [/\bsrc="([^"]*)"/]
   const htmlResourceRoot = options.htmlResourceRoot
   const callback = this.callback
+  const filter = options.filter || (() => true)
 
   const use = (match, url) => {
     let code
     const output = 'raw'
     match = match.toString()
-    if (
-      url.startsWith('~') &&
-      loaderUtils.isUrlRequest(url, htmlResourceRoot)
-    ) {
+    if (filter(url) && loaderUtils.isUrlRequest(url, htmlResourceRoot)) {
       const urlRequest = loaderUtils.urlToRequest(url, htmlResourceRoot)
       const attr = match.split(url)
       const codes = [attr[0], urlRequest, attr[1]].map(JSON.stringify)

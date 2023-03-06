@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>multi-page</title>
-</head>
-<body>
-  <main>
-    <img src="~src/assets/img/logo.png" alt="logo" class="logo">
-    <h1>欢迎使用 multi-page </h1>
-    <ul class="link-group">
-        <a href="./order.html">订单</a>
-        <a href="./order-details.html">订单详情</a>
-        <a target="_blank" href="https://www.daysnap.cn">Daysnap 官网</a>
-        <a target="_blank" href="https://www.github.com/daysnap-templates/multi-page">GitHub</a>
-    </ul>
-  </main>
-</body>
-</html>
+{{{extend 'src/layouts/index.html'}}}
+
+{{{block 'title'}}}首页 - multi-page{{{/block}}}
+
+{{{block 'content'}}}
+
+<main>
+  {{{include 'src/components/header/index.html'}}}
+  <ul class="link-group">
+    <a href="./order.html">订单</a>
+    <a href="./order-details.html">订单详情</a>
+    <a target="_blank" href="https://www.daysnap.cn">Daysnap 官网</a>
+    <a target="_blank" href="https://www.github.com/daysnap-templates/multi-page">GitHub</a>
+  </ul>
+</main>
+
+{{{/block}}}
