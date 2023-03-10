@@ -22,5 +22,8 @@ yarn-error.log*
 # ide
 .idea
 
+# lock
+package-lock.json
+
 # other
 FAQ.md

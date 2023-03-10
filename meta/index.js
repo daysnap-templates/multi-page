@@ -3,10 +3,8 @@ module.exports = {
   // configureHelper: {
   //   includes: function () {}
   // },
+
   // 配置 questions 相关 三种方式
-  // configureInquirer: [{ name: 'q1', type: 'string', ... }],
-  // configureInquirer: { q1: { type: 'string', ... } },
-  // configureInquirer: async ({ inquirer, metalsmith, files }) => answers
   configureInquirer: async ({ inquirer, metalsmith, files }) => {
     const { author, name } = metalsmith.metadata()
     return inquirer.prompt([
@@ -55,30 +53,34 @@ module.exports = {
             name: '引入微信 jssdk ?',
             value: 'jweixin'
           },
-        ]
-      }
+        ],
+      },
+      {
+        type: 'checkbox',
+        name: 'dependencies',
+        choices: [
+          {
+            name: '@daysnap/utils 工具库',
+            value: '@daysnap/utils',
+          },
+        ],
+      },
     ])
   },
+
   // 配置过滤文件的方式 2种
-  // configureFilter ({ minimatch, files, metalsmith }) {
-  //   const fileNames = Object.keys(files)
-  //   const { lintConfig } = metalsmith.metadata()
-  //   fileNames.forEach((file) => {
-  //     if (minimatch(file, '.eslintrc.js', { dot: true })) {
-  //       if (!lintConfig.includes('eslint')) {
-  //         delete files[file]
-  //       }
-  //     }
-  //   })
-  // }
   configureFilter: {
-    'flexible.js': 'libs.includes("flexible")',
-    'jquery-1.8.1.min.js': 'libs.includes("jquery")',
-    'jweixin-1.6.0.js': 'libs.includes("jweixin")',
+    '**/flexible.js': 'libs.includes("flexible")',
+    '**/jquery-1.8.1.min.js': 'libs.includes("jquery")',
+    '**/jweixin-1.6.0.js': 'libs.includes("jweixin")',
+    '.eslintignore': 'lintConfig.includes("eslint")',
     '.eslintrc.js': 'lintConfig.includes("eslint")',
+    '.prettierignore': 'lintConfig.includes("prettier")',
+    '.prettierrc.js': 'lintConfig.includes("prettier")',
   },
+
   // 完成
-  complete: (data, { logger, chalk }) => {
+  complete: (data, { chalk }) => {
     const message = `
 # ${chalk.green('项目初始化成功!')}
 # 可以执行:
