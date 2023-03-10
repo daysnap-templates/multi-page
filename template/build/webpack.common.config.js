@@ -37,6 +37,7 @@ module.exports = {
         loader: resolve('build/art-template-loader'),
         options: {
           // https://aui.github.io/art-template/zh-cn/docs/options.html
+          // https://github.com/aui/art-template/issues/550
           resolveFilename(path, context) {
             ;/^src/.test(path) && (path = path.replace(/^src/, resolve('src')))
             return resolveFilename(path, context)
