@@ -8,7 +8,7 @@
 npm install @daysnap/cli
 ```
 2. 在你的项目目录下执行
-```bash 
+```bash
 dsc create my-project -t {{ name }}
 ```
 3. 更多命令可以执行 `dsc -h` 查看
@@ -55,3 +55,6 @@ webpack处理图片后根目录会多出一份，是因为webpack5内部已支�
  详细见:https://webpack.docschina.org/guides/asset-modules/
 
 webpack-dev-serve 要配置style-loader嵌套style节点到页面，因为如果用生产的配置产生了hash值 css文件将会找不到
+
+https://babel.dev/docs/babel-preset-env#usebuiltins
+
