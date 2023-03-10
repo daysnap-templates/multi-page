@@ -1,100 +1,97 @@
-const loaderUtils = require('loader-utils')
-const template = require('art-template')
-const precompile = require('art-template/lib/precompile')
+const loaderUtils = require('loader-utils');
+const template = require('art-template');
+const precompile = require('art-template/lib/precompile');
 
-// todo 这里修改配置规则 防止跟 vue 冲突
-template.defaults.rules[1].test = /{{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}}/
+// Proprietary options: htmlResourceRoot, htmlResourceRules
 
 const loader = function (source) {
-  let result
-  let options = this.getOptions() || {}
-  // let htmlResourceRules = [/( | data-)src="([^"]*)"/];
-  let htmlResourceRules = [/\bsrc="([^"]*)"/]
-  const htmlResourceRoot = options.htmlResourceRoot
-  const callback = this.callback
-  const filter = options.filter || (() => true)
+    let result;
+    let options = loaderUtils.getOptions(this) || {};
+    let htmlResourceRules = [/\bsrc="([^"]*)"/];
+    const htmlResourceRoot = options.htmlResourceRoot;
+    const callback = this.callback;
+    const use = (match, url) => {
+        let code;
+        const output = 'raw';
+        match = match.toString();
+        if (url.startsWith('~') && loaderUtils.isUrlRequest(url, htmlResourceRoot)) {
+            const urlRequest = loaderUtils.urlToRequest(url, htmlResourceRoot);
+            const attr = match.split(url);
+            const codes = [attr[0], urlRequest, attr[1]].map(JSON.stringify);
+            code = codes[0] + `+require(${codes[1]})+` + codes[2];
+        } else {
+            code = JSON.stringify(match);
+        }
 
-  const use = (match, url) => {
-    let code
-    const output = 'raw'
-    match = match.toString()
-    if (filter(url) && loaderUtils.isUrlRequest(url, htmlResourceRoot)) {
-      const urlRequest = loaderUtils.urlToRequest(url, htmlResourceRoot)
-      const attr = match.split(url)
-      const codes = [attr[0], urlRequest, attr[1]].map(JSON.stringify)
-      code = codes[0] + `+require(${codes[1]})+` + codes[2]
-    } else {
-      code = JSON.stringify(match)
+        return {
+            output,
+            code
+        };
+    };
+
+
+    if (this.cacheable) {
+        this.cacheable();
     }
-    return {
-      output,
-      code,
+
+    if (options.debug === undefined) {
+        options.debug = this.debug;
     }
-  }
 
-  if (this.cacheable) {
-    this.cacheable()
-  }
-
-  if (options.debug === undefined) {
-    options.debug = this.debug
-  }
-
-  if (options.minimize === undefined) {
-    options.minimize = this.minimize
-  }
-
-  if (options.htmlResourceRules !== undefined) {
-    if (Array.isArray(options.htmlResourceRules)) {
-      htmlResourceRules = options.htmlResourceRules
-    } else if (options.htmlResourceRules === false) {
-      htmlResourceRules = []
-    } else {
-      throw new Error(`Invalid value to options parameter htmlResourceRules`)
+    if (options.minimize === undefined) {
+        options.minimize = this.minimize;
     }
-  }
 
-  if (options.rules === undefined) {
-    options.rules = []
-  }
 
-  if (options.ignore === undefined) {
-    options.ignore = []
-  }
+    if (options.htmlResourceRules !== undefined) {
+        if (Array.isArray(options.htmlResourceRules)) {
+            htmlResourceRules = options.htmlResourceRules;
+        } else if (options.htmlResourceRules === false) {
+            htmlResourceRules = [];
+        } else {
+            throw new Error(`Invalid value to options parameter htmlResourceRules`);
+        }
+    }
 
-  options.rules.push(...template.defaults.rules)
-  htmlResourceRules.forEach((test) => {
-    options.rules.push({
-      test,
-      use,
-    })
-  })
+    if (options.rules === undefined) {
+        options.rules = [];
+    }
 
-  options.source = source
-  options.filename = this.resourcePath
-  options.sourceMap = this.sourceMap
-  options.sourceRoot = process.cwd()
-  options.ignore.push(`require`)
+    if (options.ignore === undefined) {
+        options.ignore = [];
+    }
 
-  try {
-    result = precompile(options)
-  } catch (error) {
-    callback(error)
-    return
-  }
+    options.rules.push(...template.defaults.rules);
+    htmlResourceRules.forEach(test => {
+        options.rules.push({
+            test,
+            use
+        });
+    });
 
-  const code = result.toString()
-  const sourceMap = result.sourceMap
-  const ast = result.ast
+    options.source = source;
+    options.filename = this.resourcePath;
+    options.sourceMap = this.sourceMap;
+    options.sourceRoot = process.cwd();
+    options.ignore.push(`require`);
+    try {
+        result = precompile(options);
+    } catch (error) {
+        callback(error);
+        return;
+    }
 
-  if (
-    sourceMap &&
-    (!sourceMap.sourcesContent || !sourceMap.sourcesContent.length)
-  ) {
-    sourceMap.sourcesContent = [source]
-  }
+    const code = result.toString();
+    const sourceMap = result.sourceMap;
+    const ast = result.ast;
 
-  callback(null, code, sourceMap, ast)
-}
+    if (sourceMap && (!sourceMap.sourcesContent || !sourceMap.sourcesContent.length)) {
+        sourceMap.sourcesContent = [source];
+    }
 
-module.exports = loader
+    callback(null, code, sourceMap, ast);
+};
+
+
+
+module.exports = loader;

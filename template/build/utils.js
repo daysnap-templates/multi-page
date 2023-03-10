@@ -1,57 +1,29 @@
-const { requireContext } = require('@daysnap/require-context')
+// 找到view 目录下所有的目录并生成['home' , 'order' , 'order-details' , 'order-details-home' ]
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fs = require('fs')
 
-const resolve = (...args) => path.join(__dirname, '..', ...args)
-
-const getTemplateFile = (dirname) => {
-  return ['html.ts', 'html.js', 'index.html']
-    .map((filename) => path.join(dirname, filename))
-    .find((filepath) => {
-      let stat
-      try {
-        stat = fs.statSync(filepath)
-      } catch {
-        /* empty */
-      }
-      return !!stat
-    })
+const findFileName = (dirName , prefix ) => {
+    const dirpath = path.join(__dirname , dirName)
+    let files = fs.readdirSync(dirpath)
+    files = files.filter( file =>  fs.statSync(`${dirpath}/${file}`).isDirectory() )
+    let childFiles = []
+    if(files.length > 0){
+        files.forEach( file =>{
+            childFiles = [...childFiles , ...findFileName( `${dirName}/${file}` , prefix? `${prefix}-${file}` :file )]
+        })
+    }
+    if(!prefix){
+        return [...files , ...childFiles]
+    }{
+        return [...files.map( file => `${prefix}-${file}` ) , ...childFiles]
+    }
 }
 
-const parseDir = (dir) => {
-  return requireContext(dir, /index\.[jt]s$/)
-    .keys()
-    .filter((item) => !item.includes('components'))
-    .reduce(
-      (res, filepath) => {
-        const { entry, arrHtmlWebpackPlugin } = res
-        const dirname = path.dirname(filepath)
-        const name = dirname.slice(dir.length + 1).replaceAll(path.sep, '-')
-
-        entry[name] = filepath
-
-        arrHtmlWebpackPlugin.push(
-          new HtmlWebpackPlugin({
-            filename: `${name}.html`,
-            template: getTemplateFile(dirname),
-            minify: {
-              removeAttributeQuotes: false, // 移除属性的引号
-              removeComments: false, // 移除注释
-              collapseWhitespace: false, // 折叠空白区域
-            },
-            chunks: [name],
-            inject: 'body',
-          }),
-        )
-
-        return res
-      },
-      { entry: {}, arrHtmlWebpackPlugin: [] },
-    )
+const generateEntry = ( p ) => {
+    const fileNames = findFileName( p )
+    return fileNames.reduce((entry,item) => {
+        entry[item]=path.join(__dirname , p , `/${item.split('-').join('/')}/index.js`)
+        return entry
+    },{})
 }
-
-module.exports = {
-  parseDir,
-  resolve,
-}
+module.exports = generateEntry
