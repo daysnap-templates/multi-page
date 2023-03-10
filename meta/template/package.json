@@ -44,7 +44,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    ${{if lintConfig.includes('prettier')}}
+    ${{if lintConfig.includes('@daysnap/utils')}}
     "@daysnap/utils": "^0.0.41",
     ${{/if}}
     "core-js": "^3.29.0"
