@@ -1,9 +1,4 @@
 module.exports = {
-  // 配置 artTemplate 过滤器
-  // configureHelper: {
-  //   includes: function () {}
-  // },
-
   // 配置 questions 相关 三种方式
   configureInquirer: async ({ inquirer, metalsmith, files }) => {
     const { author, name } = metalsmith.metadata()
@@ -61,7 +56,7 @@ module.exports = {
         choices: [
           {
             name: '@daysnap/utils 工具库',
-            value: '@daysnap/utils',
+            value: 'daysnap-utils',
           },
         ],
       },
