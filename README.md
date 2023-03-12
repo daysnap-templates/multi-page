@@ -58,3 +58,25 @@ webpack-dev-serve 要配置style-loader嵌套style节点到页面，因为如果
 
 https://babel.dev/docs/babel-preset-env#usebuiltins
 
+@babel/polyfill
+提供完整 ES2015+ 环境所需的 polyfill
+
+此包已被弃用，取而代之的是单独包含core-js和的必需部分regenerator-runtime。有关更多信息，请参阅我们的网站@babel/polyfill。
+IE5.0 1999年3月18日
+IE6.0 2001年8月27日
+IE7.0 2006年
+IE8 2009年3月19日
+IE9 2011年3月14日
+IE10 2012年10月25日
+IE11 2013年10月17日
+
+1997年，ECMAScript 1.0发布。
+1998年，ECMAScript 2.0发布
+1999年，ECMAScript 3.0发布
+2000年，ECMAScript 4.0开始酝酿
+2008年，由于对于4.0版本应该包括哪些功能，各方分歧太大，争论过于激烈，ECMA开会决定，中止ECMAScript 4.0的开发，将其中涉及现有功能改善的一小部分，发布为ECMAScript 3.1
+es5是2009.12月发布的
+es6是2015.6月发布的   （IE7~11 基本不支持 ES6）
+
+core-js 或 @babel/polyfill。只转换成es5
+如果要支持低版本ie需要 对应版本的polyfill
