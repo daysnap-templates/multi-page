@@ -2,7 +2,7 @@ const { merge } = require('webpack-merge')
 const webpackBase = require('./webpack.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = merge(webpackBase, {
-  mode: 'development',
+  mode: 'production',
   // loader 配置
   module: {
     rules: [

@@ -67,7 +67,7 @@ IE6.0 2001年8月27日
 IE7.0 2006年
 IE8 2009年3月19日
 IE9 2011年3月14日
-IE10 2012年10月25日
+IE10 2012年10月25日nv
 IE11 2013年10月17日
 
 1997年，ECMAScript 1.0发布。
@@ -80,3 +80,34 @@ es6是2015.6月发布的   （IE7~11 基本不支持 ES6）
 
 core-js 或 @babel/polyfill。只转换成es5
 如果要支持低版本ie需要 对应版本的polyfill
+
+
+
+## 组件库
+
+- Button
+- Cell
+- ...
+
+include.js
+
+Button => Button.js => require('include.js')
+Cell => Cell.js => require('include.js')
+
+A 页面
+require('include.js')
+import { Button } = 'WHB'
+import { Cell } = 'WHB'
+
+
+
+
+
+A 页面 a.js   // A.html => a.js 引入 include.js => include()
+||
+B 页面 b.js   // B.html => b.js 引入 include.js => include()
+
+a.js b.js common.js
+
+A a.js + common.js
+B b.js + common.js
