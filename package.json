@@ -1,0 +1,27 @@
+{
+  "name": "multi-page",
+  "version": "1.0.0",
+  "description": "多页面打包模版",
+  "main": "./template/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daysnap-templates/multi-page.git"
+  },
+  "keywords": [
+    "多页面打包模版"
+  ],
+  "author": "haibo.wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daysnap-templates/multi-page/issues"
+  },
+  "homepage": "https://github.com/daysnap-templates/multi-page#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4"
+  }
+}
