@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{{block 'title'}}}multi-page{{{/block}}}</title>
+  <!--设置字符编码-->
+  <meta charset="UTF-8">
+  <!--手机开发屏幕自适应-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  ${{if libs.includes('flexible')}}
+  <script src="assets/lib/flexible.js"></script>
+  ${{/if}}
+  ${{if libs.includes('jquery')}}
+  <script src="assets/lib/jquery-1.8.1.min.js"></script>
+  ${{/if}}
+  ${{if libs.includes('jweixin')}}
+  <script src="assets/lib/jweixin-1.6.0.js"></script>
+  ${{/if}}
+  {{{block 'head'}}}{{{/block}}}
+</head>
+<body>
+{{{block 'body'}}}{{{/block}}}
+</body>
+</html>
