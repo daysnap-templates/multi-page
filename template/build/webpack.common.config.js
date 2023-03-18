@@ -52,6 +52,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        // include: [/[/\\]node_modules[/\\][@\\]daysnap[/\\]/, resolve('src')],
       },
       // 图片
       {

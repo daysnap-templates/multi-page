@@ -44,3 +44,26 @@ dsc -h
 
 - [postcss-loader]
 - [postcss-preset-env]
+
+
+```
+//提取node_modules里面的三方模块
+module.exports = {
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    chunks: "initial",
+                    test: path.resolve(__dirname, "node_modules") // 路径在 node_modules 目录下的都作为公共部分
+          name: "vendor", // 使用 vendor 入口作为公共部分
+                    enforce: true,
+                },
+            },
+        },
+    },
+}
+//提取 manifest （webpack运行代码）
+{
+    runtimeChunk: true;
+}
+```
