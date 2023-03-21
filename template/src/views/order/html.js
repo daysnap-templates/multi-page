@@ -3,5 +3,5 @@
 const art = require('./index.html')
 
 export default art({
-  name: 'order',
+    name: 'order',
 })
