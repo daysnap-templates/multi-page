@@ -22,7 +22,7 @@ const findFileName = (dirName , prefix ) => {
 const generateEntry = ( p ) => {
     const fileNames = findFileName( p )
     return fileNames.reduce((entry,item) => {
-        entry[item]=path.join(__dirname , p , `/${item.split('-').join('/')}/index.js`)
+        entry[item]=path.join(__dirname , p , `/${item.split('-').join('/')}/index.ts`)
         return entry
     },{})
 }

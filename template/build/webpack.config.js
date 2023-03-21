@@ -12,7 +12,7 @@ const HtmlWebpackPluginList = Object.entries(entryPathList).map(
   ([key, value]) =>
     new HtmlWebpackPlugin({
       filename: `${key}.html`,
-      template: value.replace('index.js', 'html.js'),
+      template: value.replace('index.ts', 'html.js'),
       chunks: [key],
     }),
 )
@@ -32,6 +32,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.t?js$/,
         exclude: /node_modules/,
